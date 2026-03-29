@@ -11,7 +11,12 @@ def get_event_types(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.EventType).offset(skip).limit(limit).all()
 
 def create_event_type(db: Session, event_type: schemas.EventTypeCreate):
-    db_event_type = models.EventType(**event_type.model_dump())
+    db_event_type = models.EventType(
+        title=event_type.title,
+        description=event_type.description,
+        duration=event_type.duration,
+        slug=event_type.slug
+    )
     db.add(db_event_type)
     db.commit()
     db.refresh(db_event_type)
