@@ -3,9 +3,12 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # Ensure the DB URL matches the docker-compose settings
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@localhost:5432/booking_db")
-
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@localhost:5432/booking_db")
+DATABASE_URL = "sqlite:///./test.db"
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
