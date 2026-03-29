@@ -34,11 +34,11 @@ client = TestClient(app)
 def test_create_event_type():
     response = client.post(
         "/event-types/",
-        json={"name": "Consultation", "slug": "consultation", "duration": 30},
+        json={"title": "Consultation", "slug": "consultation", "duration": 30},
     )
     assert response.status_code == 200
     data = response.json()
-    assert data["name"] == "Consultation"
+    assert data["title"] == "Consultation"
     assert data["slug"] == "consultation"
     assert data["duration"] == 30
     assert "id" in data
@@ -47,7 +47,7 @@ def test_create_event_type():
 def test_create_event_type_invalid_duration():
     response = client.post(
         "/event-types/",
-        json={"name": "Quick Chat", "slug": "quick-chat", "duration": -15},
+        json={"title": "Quick Chat", "slug": "quick-chat", "duration": -15},
     )
     assert response.status_code == 422
 

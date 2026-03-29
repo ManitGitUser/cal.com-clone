@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock } from 'lucide-react';
-
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 export default function EventList() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8000/event-types/')
+    fetch(`${API}/event-types/`)
       .then((res) => res.json())
       .then((data) => {
         setEvents(data);
@@ -18,7 +18,7 @@ export default function EventList() {
         console.error('Error fetching events:', err);
         setLoading(false);
       });
-  }, []);
+  }, [API]);
 
   if (loading) {
     return <p className="text-center">Loading available events...</p>;
@@ -27,9 +27,8 @@ export default function EventList() {
   // Fallback state for local dev
   if (events.length === 0) {
     return (
-      <div className="card" style={{padding:'2rem', textAlign:'center'}}>
-        <h2>No Events Configured Base</h2>
-        <p>Please use Swagger UI (http://localhost:8000/docs) to seed Event Types.</p>
+      <div className="card" style={{ padding: '2rem', textAlign: 'center' }}>
+        <h2>No Events Found</h2>
       </div>
     );
   }
@@ -39,12 +38,13 @@ export default function EventList() {
       <h1 style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Select an Event</h1>
       <div className="event-grid">
         {events.map((event) => (
-          <div 
-            key={event.id} 
+          <div
+            key={event.id}
             className="card event-card"
             onClick={() => navigate(`/book/${event.id}`, { state: { eventType: event } })}
           >
-            <h3 className="event-title">{event.name}</h3>
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
             <div className="flex-between mt-4">
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)' }}>
                 <Clock size={16} color="var(--accent)" />
