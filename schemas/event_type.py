@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 class EventTypeBase(BaseModel):
-    name: str
+    title: str
     slug: str
     duration: int = Field(..., gt=0, description="Duration in minutes, must be positive")
 

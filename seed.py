@@ -11,8 +11,8 @@ def seed_database():
             return
 
         # Create Event Types
-        event_30 = models.EventType(name="30 Min Meeting", slug="30-min-meeting", duration=30)
-        event_60 = models.EventType(name="60 Min Interview", slug="60-min-interview", duration=60)
+        event_30 = models.EventType(title="30 Min Meeting", slug="30-min-meeting", duration=30)
+        event_60 = models.EventType(title="60 Min Interview", slug="60-min-interview", duration=60)
         
         db.add(event_30)
         db.add(event_60)

@@ -7,7 +7,8 @@ from routes import event_types_router, availabilities_router, bookings_router
 from seed import seed_database
 
 from fastapi.middleware.cors import CORSMiddleware
-
+Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Create database tables
