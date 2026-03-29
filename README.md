@@ -1,4 +1,3 @@
-# cal.com-clone
 # Scheduling Platform (Cal.com Clone)
 
 ## Overview
