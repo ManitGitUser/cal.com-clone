@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #111111;
+  --bg-card: #1a1a1a;
+  --text-main: #ededed;
+  --text-muted: #a1a1aa;
+  --text-inverse: #111111;
+  --border-color: #333333;
+  --border-hover: #555555;
+  --accent: #ededed; /* Cal.com uses high contrast B&W often */
+  --accent-secondary: #000000;
+  --success: #10b981;
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* Typography */
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+#root {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Header */
+.app-header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+.brand-title {
+  display: flex; 
+  align-items: center; 
+  gap: 0.5rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Cards & Layout */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.event-card {
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.event-card:hover {
+  border-color: var(--border-hover);
+  background: #222222;
+}
+.event-title {
+  margin-bottom: 0.5rem;
+}
+
+/* Booking Layout Grid */
+.booking-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  min-height: 500px;
+}
+
+.booking-sidebar {
+  padding: 2rem;
+  border-right: 1px solid var(--border-color);
+}
+.booking-main {
+  padding: 2rem;
+}
+.booking-slots {
+  padding: 2rem;
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Calendar Minimal Styles */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+.cal-header {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 99px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-main);
+  transition: background 0.2s;
+}
+.cal-day:hover:not(.empty) {
+  background: var(--border-hover);
+}
+.cal-day.selected {
+  background: var(--accent);
+  color: var(--text-inverse);
+}
+.cal-day.empty {
+  cursor: default;
+}
+.cal-day.disabled {
+  color: #444;
+  cursor: not-allowed;
+}
+
+/* Form Inputs */
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--text-muted);
+}
+label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+  background-color: var(--accent);
+  color: var(--text-inverse);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.slot-btn {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  width: 100%;
+  text-align: center;
+}
+.slot-btn:hover {
+  border-color: var(--accent);
+}
+.slot-btn.selected {
+  background-color: var(--border-hover);
+  border-color: var(--text-main);
+}
+
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+  .booking-sidebar, .booking-slots {
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .booking-slots {
+    max-height: 400px;
+  }
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+}
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
